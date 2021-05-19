@@ -6,12 +6,14 @@ class Play extends Phaser.Scene {
     preload() {
         // load images/tile sprites
         this.load.image('rocket', './assets/rocket.png');
-        this.load.image('spaceship', './assets/spaceship.png');
+        this.load.image('jet', './assets/jet.png');
         this.load.image('sky', './assets/sky.png');
+        this.load.image('ui', './assets/ui.png');
         this.load.image('hill1', './assets/hill1.png');
         this.load.image('hill2', './assets/hill2.png');
         this.load.image('hill3', './assets/hill3.png');
         this.load.image('hill4', './assets/hill4.png');
+
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
       }
@@ -22,21 +24,20 @@ class Play extends Phaser.Scene {
         this.hill4 = this.add.tileSprite(0, 0, 640, 480, 'hill4').setOrigin(0, 0)
         this.hill3 = this.add.tileSprite(0, 0, 640, 480, 'hill3').setOrigin(0, 0)
         this.hill2 = this.add.tileSprite(0, 0, 640, 480, 'hill2').setOrigin(0, 0)
-        this.hill1 = this.add.tileSprite(0, 0, 640, 480, 'hill1').setOrigin(0, 0)// green UI background
-        //this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x000000).setOrigin(0, 0);
-        // white borders
-        //this.add.rectangle(0, 0, game.config.width, borderUISize, 0x000000).setOrigin(0, 0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0x000000).setOrigin(0, 0);
-        //this.add.rectangle(0, 0, borderUISize, game.config.height, 0x000000).setOrigin(0, 0);
-        //this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0x000000).setOrigin(0, 0);
-        
+        this.hill1 = this.add.tileSprite(0, 0, 640, 480, 'hill1').setOrigin(0, 0)
+        this.ui = this.add.tileSprite(0, 0, 640, 480, 'ui').setOrigin(0, 0)
+
         // add rocket (p1)
-        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0.5);
+        this.p1Rocket = new Rocket(this, game.config.width/2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 1);
         
-        // add spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'spaceship', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'spaceship', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'spaceship', 0, 10).setOrigin(0,0);
+        // add jets (x3)
+        this.ship01 = new Jet(this, game.config.width + borderUISize*6, borderUISize*4, 'jet', 0, 30).setOrigin(0, 0);
+        this.ship02 = new Jet(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'jet', 0, 20).setOrigin(0,0);
+        this.ship03 = new Jet(this, game.config.width, borderUISize*6 + borderPadding*4, 'jet', 0, 10).setOrigin(0,0);
+
+        // add aircraft
+
+        this.aircraft01 = new Aircraft(this, game.config.width + borderUISize*3, borderUISize*5, 'aircraft', 0, 40).setOrigin(0, 0);
 
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -67,7 +68,7 @@ class Play extends Phaser.Scene {
         },
           fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*38, this.p1Score, scoreConfig);
 
         // GAME OVER flag
         this.gameOver = false;
@@ -89,20 +90,19 @@ class Play extends Phaser.Scene {
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start("menuScene");
         }
+        //this.sound.play('sfx_music')
         this.hill4.tilePositionX -= 0.25;
         this.hill3.tilePositionX -= 0.50;
         this.hill2.tilePositionX -= 0.75;
         this.hill1.tilePositionX -= 1.00;
+
         if (!this.gameOver) {
           this.p1Rocket.update();         // update rocket sprite
-          this.ship01.update();           // update spaceships (x3)
+          this.ship01.update();           // update jets (x3)
           this.ship02.update();
           this.ship03.update();
         }
-        //this.p1Rocket.update();
-        //this.ship01.update();               // update spaceships (x3)
-        //this.ship02.update();
-        //this.ship03.update();
+        
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
            this.p1Rocket.reset();

@@ -8,9 +8,10 @@ class Menu extends Phaser.Scene {
       this.load.audio('sfx_explosion', './assets/explosion38.wav');
       this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
       this.load.audio('sfx_music', './assets/common_fight.wav');
+      this.load.image('menu', './assets/menu.png');
     }
     create() {
-      let menuConfig = {
+      this.menu = this.add.tileSprite(0, 0, 640, 480, 'menu').setOrigin(0, 0)      /*let menuConfig = {
         fontFamily: 'Courier',
         fontSize: '28px',
         backgroundColor: '#F3B141',
@@ -21,15 +22,15 @@ class Menu extends Phaser.Scene {
           bottom: 5,
       },
         fixedWidth: 0
-      }
+      }*/ 
 
       // menu text
-      this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
+      /*this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
       this.add.text(game.config.width/2, game.config.height/2, 'use <--> arrows to move & F to fire', menuConfig).setOrigin(0.5);
       menuConfig.backgroundColoe = '#00FF00';
       menuConfig.color = '#000';
       this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'press <- for Novice or -> for Expert', menuConfig).setOrigin(0.5);
-
+*/
       // define keys
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
       keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -40,7 +41,8 @@ class Menu extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
         // easy mode
         game.settings = {
-          spaceshipSpeed: 3,
+          jetSpeed: 3,
+          aircraftSpeed: 5,
           gameTimer: 60000    
         }
         this.sound.play('sfx_select');
@@ -49,7 +51,8 @@ class Menu extends Phaser.Scene {
       if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
         // hard mode
         game.settings = {
-          spaceshipSpeed: 4,
+          jetSpeed: 4,
+          aircraftSpeed: 6,
           gameTimer: 45000    
         }
         this.sound.play('sfx_select');
