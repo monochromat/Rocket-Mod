@@ -1,3 +1,6 @@
+// Efrain Luengas
+// 5/19/2021
+// 13 hours to complete
 // Jet prefab
 class Jet extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame, pointValue) {

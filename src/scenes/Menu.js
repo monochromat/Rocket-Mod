@@ -1,3 +1,6 @@
+// Efrain Luengas
+// 5/19/2021
+// 13 hours to complete
 class Menu extends Phaser.Scene {
     constructor() {
       super("menuScene");
@@ -11,26 +14,10 @@ class Menu extends Phaser.Scene {
       this.load.image('menu', './assets/menu.png');
     }
     create() {
-      this.menu = this.add.tileSprite(0, 0, 640, 480, 'menu').setOrigin(0, 0)      /*let menuConfig = {
-        fontFamily: 'Courier',
-        fontSize: '28px',
-        backgroundColor: '#F3B141',
-        color: '#843605',
-        align: 'right',
-        padding: {
-          top: 5,
-          bottom: 5,
-      },
-        fixedWidth: 0
-      }*/ 
+      // Menu image
+      this.menu = this.add.tileSprite(0, 0, 640, 480, 'menu').setOrigin(0, 0)     
 
-      // menu text
-      /*this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-      this.add.text(game.config.width/2, game.config.height/2, 'use <--> arrows to move & F to fire', menuConfig).setOrigin(0.5);
-      menuConfig.backgroundColoe = '#00FF00';
-      menuConfig.color = '#000';
-      this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'press <- for Novice or -> for Expert', menuConfig).setOrigin(0.5);
-*/
+
       // define keys
       keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
       keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);

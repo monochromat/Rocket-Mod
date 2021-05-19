@@ -1,3 +1,6 @@
+// Efrain Luengas
+// 5/19/2021
+// 13 hours to complete
 // Rocket prefab
 class Rocket extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
@@ -12,14 +15,14 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
     update() {
         // L/R movement
-        //if(!this.isFiring) {
+        
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
             } else if (keyRIGHT.isDown && this.x <= game.config.width -
             borderUISize - this.width) {
                 this.x += this.moveSpeed;
             }
-        //}
+      
         // fire
         if(Phaser.Input.Keyboard.JustDown(keyF)) {
             this.isFiring = true;

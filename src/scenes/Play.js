@@ -1,3 +1,6 @@
+// Efrain Luengas
+// 5/19/2021
+// 13 hours to complete
 class Play extends Phaser.Scene {
     constructor() {
       super("playScene");
@@ -21,6 +24,19 @@ class Play extends Phaser.Scene {
       }
 
     create() {
+        // music
+        this.sfxMusic = this.sound.add("sfx_music");
+        var sfxmusicConfig = {
+          mute: false,
+          volume: 0.25,
+          rate: 1,
+          detune: 0,
+          seek:0,
+          loop: true,
+          delay: 0
+        }
+        this.sfxMusic.play(sfxmusicConfig);
+
         // place background tile sprites
         this.sky = this.add.tileSprite(0, 0, 640, 480, 'sky').setOrigin(0, 0)
         this.hill4 = this.add.tileSprite(0, 0, 640, 480, 'hill4').setOrigin(0, 0)
