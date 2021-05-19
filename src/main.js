@@ -9,6 +9,8 @@ blip_selesct12.wav: https://freesound.org/people/LittleRobotSoundFactory/sounds/
 
 sound asset common_fight.wav was downloaded from https://patrickdearteaga.com/chiptune-8-bit-retro/
 
+I also got help with implementing the music from here https://www.youtube.com/watch?v=COncYQLGJS8
+
 Points:
 I believe with wht I have implemented I deserve 95 points.
 I redesigned the art, UI, and sound (60)
